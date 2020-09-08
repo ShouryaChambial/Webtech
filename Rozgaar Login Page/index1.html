@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Register-login Form</title>
+    <link rel="stylesheet" href="styles1.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$(".login").hide();
+			$(".register_li").addClass("active");
+
+			$(".login_li").click(function(){
+			  $(this).addClass("active");
+			  $(".register_li").removeClass("active");
+			  $(".login").show();
+			   $(".register").hide();
+			})
+
+			$(".register_li").click(function(){
+			  $(this).addClass("active");
+			  $(".login_li").removeClass("active");
+			  $(".register").show();
+			   $(".login").hide();
+			})
+		});
+	</script>
+</head>
+<body>
+  <div class="wrapper">
+  <div class="left">
+      <h3>Rozgaar</h3>   
+    <img src="image.jpg" alt="Register, Login image">
+  </div>
+  <div class="right">
+    <div class="tabs">
+      <ul>
+        <li class="register_li">Register</li>
+        <li class="login_li">login</li>
+      </ul>
+    </div>
+    
+    <form  ng-app="myApp"  ng-controller="validateCtrl" name="myForm" novalidate>
+    <div class="register">
+      <div class="input_field">
+        <input type="text" name="user" ng-model="user" required placeholder="Username" class="input">
+        <br>
+        <span style="color:red" ng-show="myForm.user.$dirty && myForm.user.$invalid">
+        <span ng-show="myForm.user.$error.required">Username is required.</span>
+        </span>
+        <br>
+        <br>
+      </div>
+      <div class="input_field">
+        <input type="email" name="email" ng-model="email" required placeholder="Email" class="input">
+        <br>
+        <span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+        <span ng-show="myForm.email.$error.required">Email is required.</span>
+        <span ng-show="myForm.email.$error.email">Invalid email address.</span>
+        </span>
+        <br>
+        <br>
+      </div>
+      <div class="input_field">
+        <input type="password" name="password" ng-model="password" required placeholder="Password" class="input">
+        <br>
+        <span style="color:red" ng-show="myForm.password.$dirty && myForm.password.$invalid">
+        <span ng-show="myForm.password.$error.required">Password is required.</span>
+        </span>
+        <br>
+        <br>
+      </div>
+      <input type="submit" ng-disabled="myForm.user.$dirty && myForm.user.$invalid ||
+      myForm.email.$dirty && myForm.email.$invalid || myForm.password.$dirty && myForm.password.$invalid ">
+    </div>
+    </form>
+    <form  ng-app="myApps"  ng-controller="validateCtrl" name="myForms" novalidate>
+    <div class="login">
+        <div class="input_field">
+            <input type="email" name="email" ng-model="email" required placeholder="Email" class="input">
+            <br>
+            <span style="color:red" ng-show="myForms.email.$dirty && myForms.email.$invalid">
+            <span ng-show="myForms.email.$error.required">Email is required.</span>
+            <span ng-show="myForms.email.$error.email">Invalid email address.</span>
+            </span>
+            <br>
+            <br>
+        </div>
+        <div class="input_field">
+            <input type="password" name="password" ng-model="password" required placeholder="Password" class="input">
+            <br>
+            <span style="color:red" ng-show="myForms.password.$dirty && myForms.password.$invalid">
+            <span ng-show="myForms.password.$error.required">Password is required.</span>
+            </span>
+            <br>
+            <br>
+        </div>
+        <input type="submit" ng-disabled="myForms.email.$dirty && myForms.email.$invalid || myForms.password.$dirty && myForms.password.$invalid ">
+      </div>
+    </form>
+  </div>
+  <script>
+    var app = angular.module('myApp', []);
+    app.controller('validateCtrl', function($scope) {
+      $scope.user = 'Username';
+      $scope.email = 'abc@xyz.com';
+      $scope.password = 'abc123*#@?';
+    });
+</script>
+<script>
+    var apps = angular.module('myApps', []);
+    apps.controller('validateCtrl', function($scope) {
+      $scope.email = 'abc@xyz.com';
+      $scope.password = 'abc123*#@?';
+    });
+</script>
+   
+</div>
+</body>
+</html>
